@@ -1,0 +1,114 @@
+Option Explicit
+Sub try3()
+Dim CountCount As Single
+Dim i As Single
+Dim j As Single
+Dim k As Single
+Dim l As Single
+Dim m As Single
+Dim n As Single
+Dim iSection As Single
+Dim iX As Single
+Dim iY As Single
+Dim iRow As Single
+Dim Present(200, 35, 4, 4) As Single
+Dim moved(200, 35, 4, 4) As Single
+Dim currentOrder As Single
+Dim moveCount(428) As Single
+
+CountCount = 0
+
+For l = 1 To 5155
+ For i = 0 To 200
+  For j = 1 To 35
+   For k = 1 To 4
+    For m = 1 To 4
+     moved(i, j, k, m) = 0
+     Present(i, j, k, m) = 0
+    Next m
+   Next k
+  Next j
+ Next i
+ 
+  For j = 428 To 428
+  If Range("AO2").Offset(i, 0) = j Then
+  For i = 0 To 587073
+  ' number of bales
+   If Range("AP2").Offset(i, 0) = l Then
+    iRow = Range("E2").Offset(i, 0)
+    iSection = Range("F2").Offset(i, 0)
+    iX = Range("AM2").Offset(i, 0)
+    iY = Range("AN2").Offset(i, 0)
+    Present(iRow, iSection, iX, iY) = 1
+   End If
+  Next i
+  End If
+
+ 
+
+ 
+  For i = 0 To 200
+   For n = 1 To 35
+    For k = 1 To 4
+     For m = 1 To 4
+      moved(i, n, k, m) = 0
+     Next m
+    Next k
+   Next n
+  Next i
+  
+ Next j
+ For j = 428 To 428
+ 
+ 
+  For i = 0 To 587073
+' number of bales
+   If Range("AP2").Offset(i, 0) = l Then
+   
+    If Range("AO2").Offset(i, 0) = j Then
+     iX = Range("AM2").Offset(i, 0)
+     iY = Range("AN2").Offset(i, 0)
+     iRow = Range("E2").Offset(i, 0)
+     iSection = Range("F2").Offset(i, 0)
+     moveCount(j) = moveCount(j) + 1
+     CountCount = CountCount + 1
+     Present(iRow, iSection, iX, iY) = 0
+     If iY > 1 Then
+      For k = 1 To iY - 1
+       If Present(iRow, iSection, iX, k) = 1 And moved(iRow, iSection, iX, k) = 0 Then
+        moved(iRow, iSection, iX, k) = 1
+        moveCount(j) = moveCount(j) + 2
+        CountCount = CountCount + 2
+       End If
+      Next k
+     End If
+     If iSection > 1 Then
+      For k = 1 To iSection - 1
+       For m = 1 To 4
+        For n = 1 To 4
+         If Present(iRow, k, m, n) = 1 And moved(iRow, k, m, n) = 0 Then
+          moved(iRow, k, m, n) = 1
+          moveCount(j) = moveCount(j) + 2
+          CountCount = CountCount + 2
+         End If
+        Next n
+       Next m
+      Next k
+     End If
+    End If
+
+   End If
+  Next i
+ Next j
+
+Next l
+      
+For i = 428 To 428
+j = i
+ Range("AR2").Offset(i, 0) = moveCount(j)
+Next i
+
+MsgBox (CountCount)
+
+End Sub
+

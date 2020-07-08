@@ -1,0 +1,122 @@
+Option Explicit
+Sub SwappingRoutine()
+'Declarations
+Dim i As Single
+Dim t As Single
+Dim OldOrderI As Single
+Dim OldOrderT As Single
+Dim NewOrderI As Single
+Dim NewOrderT As Single
+Dim ColorRdLB As Single
+Dim ColorRdTest As Single
+Dim ColorRdUB As Single
+Dim MicLB As Single
+Dim MicTest As Single
+Dim MicUB As Single
+Dim TrashLB As Single
+Dim TrashTest As Single
+Dim TrashUB As Single
+Dim StapleLB As Single
+Dim StapleTest As Single
+Dim StapleUB As Single
+Dim LeafGradeLB As Single
+Dim LeafGradeTest As Single
+Dim LeafGradeUB As Single
+Dim UniformityLB As Single
+Dim UniformityTest As Single
+Dim UniformityUB As Single
+Dim StrengthLB As Single
+Dim StrengthTest As Single
+Dim StrengthUB As Single
+Dim ColorPlusBLB As Single
+Dim ColorPlusBTest As Single
+Dim ColorPlusBUB As Single
+Dim LengthLB As Single
+Dim LengthTest As Single
+Dim LengthUB As Single
+Dim OrderCheck As Single
+Dim OrderTest As Single
+Dim SwapCheck As Single
+Dim SwapTest As Single
+'Routine
+
+
+For i = 19 To 0 Step -1
+    For t = 0 To i - 1
+
+OldOrderI = Range("AO2").Offset(i, 0)
+OldOrderT = Range("AO2").Offset(t, 0)
+ColorRdLB = Range("AD2").Offset(i, 0) - 0.625
+ColorRdTest = Range("AD2").Offset(t, 0)
+ColorRdUB = Range("AD2").Offset(i, 0) + 0.625
+MicLB = Range("X2").Offset(i, 0) - 0.375
+MicTest = Range("X2").Offset(t, 0)
+MicUB = Range("X2").Offset(i, 0) + 0.375
+TrashLB = Range("AF2").Offset(i, 0) - 1.2375
+TrashTest = Range("AF2").Offset(t, 0)
+TrashUB = Range("AF2").Offset(i, 0) + 1.2375
+StapleLB = Range("W2").Offset(i, 0) - 0.35
+StapleTest = Range("W2").Offset(t, 0)
+StapleUB = Range("W2").Offset(i, 0) + 0.35
+LeafGradeLB = Range("Y2").Offset(i, 0) - 2.475
+LeafGradeTest = Range("Y2").Offset(t, 0)
+LeafGradeUB = Range("Y2").Offset(i, 0) + 2.475
+UniformityLB = Range("Z2").Offset(i, 0) - 0.625
+UniformityTest = Range("Z2").Offset(t, 0)
+UniformityUB = Range("Z2").Offset(i, 0) + 0.625
+StrengthLB = Range("AA2").Offset(i, 0) - 0.425
+StrengthTest = Range("AA2").Offset(t, 0)
+StrengthUB = Range("AA2").Offset(i, 0) + 0.425
+ColorPlusBLB = Range("AE2").Offset(i, 0) - 1.75
+ColorPlusBTest = Range("AE2").Offset(t, 0)
+ColorPlusBUB = Range("AE2").Offset(i, 0) + 1.75
+LengthLB = Range("AG2").Offset(i, 0) - 1.375
+LengthTest = Range("AG2").Offset(t, 0)
+LengthUB = Range("AG2").Offset(i, 0) + 1.375
+OrderCheck = OldOrderI
+OrderTest = OldOrderT
+SwapTest = Range("AQ2").Offset(t, 0)
+
+If SwapTest = 0 Then
+    If OrderCheck = 297 Then
+        If ColorRdTest >= ColorRdLB And ColorTest <= ColorRdUB Then
+        If MicTest >= MicLB And MicTest <= MicUB Then
+        If TrashTest >= TrashLB And TrashTest <= TrashUB Then
+        If StapleTest >= StapleLB And StapleTest <= StapleUB Then
+        If LeafGradeTest >= LeafGradeLB And LeafGradeTest <= LeafGradeUB Then
+        If UniformityTest >= UniformityLB And UniformityTest <= UniformityUB Then
+        If StrengthTest >= StrengthLB And StrengthTest <= StrengthUB Then
+        If ColorPlusTest >= ColorPlusLB And ColorPlusTest <= ColorPlusUB Then
+        If LengthTest >= LengthLB And LengthTest <= LengthUB Then
+            Range("AU2").Offset(i, 0) = OldOrderT
+            Range("AU2").Offset(t, 0) = OldOrderI
+            Range("AQ2").Offset(i, 0) = 1
+            Range("AQ2").Offset(t, 0) = 1
+            t = 600000
+        Else
+            Range("AU2").Offset(i, 0) = OldOrderI
+            Range("AU2").Offset(t, 0) = OldOrderT
+        End If
+        End If
+        End If
+        End If
+        End If
+        End If
+        End If
+        End If
+        End If
+    Else
+        Range("AU2").Offset(i, 0) = OldOrderI
+        Range("AU2").Offset(t, 0) = OldOrderT
+    End If
+Else
+    
+End If
+
+
+    Next t
+Next i
+
+
+
+End Sub
